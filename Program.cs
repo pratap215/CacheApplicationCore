@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CacheApplicationCore
+namespace TranslationApplicationCore
 {
     public class Program
     {

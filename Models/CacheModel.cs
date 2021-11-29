@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CacheApplicationCore
+namespace TranslationApplicationCore
 {
     public class CacheModel
     {

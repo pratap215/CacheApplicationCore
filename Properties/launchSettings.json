@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "CacheApplicationCore": {
+    "TranslationApplicationCore": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

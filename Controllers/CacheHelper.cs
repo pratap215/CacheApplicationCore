@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CacheApplicationCore
+namespace TranslationApplicationCore
 {
     public static class DistributedCacheExtension
     {

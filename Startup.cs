@@ -8,10 +8,10 @@ using System;
 using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using CacheApplicationCore.Services;
+using TranslationApplicationCore.Services;
 using StackExchange.Redis;
 
-namespace CacheApplicationCore
+namespace TranslationApplicationCore
 {
     public class Startup
     {
@@ -45,6 +45,8 @@ namespace CacheApplicationCore
 
             // services.AddSingleton<ICacheService, InMemoryCacheService>();
             services.AddSingleton<ICacheService, RedisCacheService>();
+            services.AddSingleton<ITranslatorService, TranslatorService>();
+            services.AddSingleton<IPageTranslatorService, PageTranslatorService>();
 
             // var cm = ConnectionMultiplexer.Connect("localhost:6379,abortConnect=false");
             //var cm = ConnectionMultiplexer.Connect("pratap.redis.cache.windows.net:6380,password=r0OeQeLO6WNohRRRtxZJdJqbqJ6iJe4ouAzCaMdTjRg=,ssl=True,abortConnect=False");
@@ -61,7 +63,7 @@ namespace CacheApplicationCore
             services.AddSwaggerGen(c =>
             {
 
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cache Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Translation Micro Service", Version = "v1" });
                 // Set the comments path for the Swagger JSON and UI.
 
             });
@@ -107,7 +109,7 @@ namespace CacheApplicationCore
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cache Service");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Translation Micro Service");
             });
         }
     }

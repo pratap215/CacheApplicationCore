@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Text;
 using Microsoft.Extensions.Caching.Distributed;
-using CacheApplicationCore.Services;
+using TranslationApplicationCore.Services;
 
 
-namespace CacheApplicationCore
+namespace TranslationApplicationCore
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,12 +21,14 @@ namespace CacheApplicationCore
         private readonly IDistributedCache _distributedcache;
         private readonly ILogger<RedisCacheController> _logger;
         private readonly ICacheService _cacheService;
-        public RedisCacheController(IMemoryCache memoryCache, IDistributedCache cache, ILogger<RedisCacheController> logger, ICacheService cacheService)
+        private readonly IPageTranslatorService _pageTranslatorService;
+        public RedisCacheController(IMemoryCache memoryCache, IDistributedCache cache, ILogger<RedisCacheController> logger, ICacheService cacheService,IPageTranslatorService pageTranslatorService)
         {
             _memoryCache = memoryCache;
             _distributedcache = cache;
             _logger = logger;
             _cacheService = cacheService;
+            _pageTranslatorService = pageTranslatorService;
         }
 
         //[HttpGet("GetCacheData")]
@@ -71,6 +73,9 @@ namespace CacheApplicationCore
         [HttpGet("GetCacheData")]
         public IActionResult GetCacheData(string cacheKey)
         {
+
+           //var restult= _pageTranslatorService.TranslatePage().Result;
+
             //checks if cache entries exists
             var res = GetDistributedCacheData(cacheKey).Result as JsonResult;
             var cachevalue = res.Value.ToString();

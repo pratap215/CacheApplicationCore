@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using StackExchange.Redis;
 
-namespace CacheApplicationCore.Services
+namespace TranslationApplicationCore.Services
 {
     public class RedisCacheService : ICacheService
     {
@@ -25,6 +25,8 @@ namespace CacheApplicationCore.Services
         {
             var db = _connectionMultiplexer.GetDatabase();
             await db.StringSetAsync(key,value);
+
+
            
         }
     }
