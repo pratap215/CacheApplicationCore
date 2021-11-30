@@ -52,8 +52,22 @@ namespace TranslationApplicationCore
             //var cm = ConnectionMultiplexer.Connect("pratap.redis.cache.windows.net:6380,password=r0OeQeLO6WNohRRRtxZJdJqbqJ6iJe4ouAzCaMdTjRg=,ssl=True,abortConnect=False");
 
             var redisConnectionString = Configuration.GetSection("Redis")["ConnectionString"];
-            var cm = ConnectionMultiplexer.Connect(redisConnectionString);
+            var config = new ConfigurationOptions()
+            {
+                Ssl = true,
+                KeepAlive = 0,
+                AllowAdmin = true,
+                EndPoints = { { "pratap.redis.cache.windows.net", 6380 } },
+                ConnectTimeout = 5000,
+                ConnectRetry = 5,
+                SyncTimeout = 5000,
+                Password= "r0OeQeLO6WNohRRRtxZJdJqbqJ6iJe4ouAzCaMdTjRg=",
+                AbortOnConnectFail = false,
+            };
 
+           
+            var cm = ConnectionMultiplexer.Connect(config);
+           
             services.AddSingleton<IConnectionMultiplexer>(cm);
 
 
