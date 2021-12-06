@@ -8,6 +8,6 @@
 
         public string languageCode { get; set; }
 
-        public bool asHtml { get; set; }
+        public string asHtml { get; set; }
     }
 }

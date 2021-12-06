@@ -100,24 +100,24 @@ namespace TranslationApplicationCore
         {
             _logger.LogInformation($"TranslateData for cache key {translatorServiceModel.elementtextcontent}");
 
-            var res = GetDistributedCacheData(translatorServiceModel.elementtextcontent).Result as JsonResult;
-            var cachevalue = res != null && res.Value != null ? res.Value.ToString() : null;
+            //var res = GetDistributedCacheData(translatorServiceModel.elementtextcontent).Result as JsonResult;
+            //var cachevalue = res != null && res.Value != null ? res.Value.ToString() : null;
 
-            if (!string.IsNullOrEmpty(cachevalue) && cachevalue != "novalue")
-            {
-                return new JsonResult(cachevalue);
-            }
+            //if (!string.IsNullOrEmpty(cachevalue) && cachevalue != "novalue")
+            //{
+            //    return new JsonResult(cachevalue);
+            //}
 
             var regionSpecifier = _configuration.GetSection("CognitiveAPI")["regionSpecifier"];
             var translatorApiKey = _configuration.GetSection("CognitiveAPI")["translatorApiKey"];
 
             var translatedText = await _translatorService.Translate(regionSpecifier, translatorApiKey, translatorServiceModel.elementtextcontent, translatorServiceModel.sourceText, translatorServiceModel.languageCode,
-                translatorServiceModel.asHtml);
+              Convert.ToBoolean(translatorServiceModel.asHtml));
 
-            _logger.LogInformation($"   data from [TRANSLATOR API] for key : [ {translatorServiceModel.elementtextcontent} ] and value [{translatedText}]");
-            var cacheModel = new CacheModel() { cacheKey = translatorServiceModel.elementtextcontent, cachevalue = translatedText };
+            //_logger.LogInformation($"   data from [TRANSLATOR API] for key : [ {translatorServiceModel.elementtextcontent} ] and value [{translatedText}]");
+            //var cacheModel = new CacheModel() { cacheKey = translatorServiceModel.elementtextcontent, cachevalue = translatedText };
 
-            await SetDistributedCacheData(cacheModel);
+            //await SetDistributedCacheData(cacheModel);
 
             return new JsonResult(translatedText);
         }

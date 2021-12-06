@@ -21,8 +21,8 @@ namespace TranslationApplicationCore
         private readonly IDistributedCache _distributedcache;
         private readonly ILogger<RedisCacheController> _logger;
         private readonly ICacheService _cacheService;
-        private readonly IPageTranslatorService _pageTranslatorService;
-        public RedisCacheController(IMemoryCache memoryCache, IDistributedCache cache, ILogger<RedisCacheController> logger, ICacheService cacheService,IPageTranslatorService pageTranslatorService)
+        private readonly ITranslatePageService _pageTranslatorService;
+        public RedisCacheController(IMemoryCache memoryCache, IDistributedCache cache, ILogger<RedisCacheController> logger, ICacheService cacheService,ITranslatePageService pageTranslatorService)
         {
             _memoryCache = memoryCache;
             _distributedcache = cache;
@@ -74,7 +74,7 @@ namespace TranslationApplicationCore
         public IActionResult GetCacheData(string cacheKey)
         {
 
-           //var restult= _pageTranslatorService.TranslatePage().Result;
+            //var restult = _pageTranslatorService.Translate();
 
             //checks if cache entries exists
             var res = GetDistributedCacheData(cacheKey).Result as JsonResult;
